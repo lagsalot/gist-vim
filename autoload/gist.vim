@@ -92,7 +92,11 @@ function! s:format_gist(gist)
   else
     let code = ""
   endif
-  return printf("gist: %s %s%s", a:gist.id, type(a:gist.description)==0?"": a:gist.description, code)
+  let id = a:gist.id 
+  let is_public = a:gist.public 
+  let filename = file.filename 
+  let desc = (a:gist.description=="" ? "no desc" : a:gist.description)
+  return printf("gist: %s : %s : %s - %s%s", id, is_public, filename, desc, code)
 endfunction
 
 " Note: A colon in the file name has side effects on Windows due to NTFS Alternate Data Streams; avoid it.
